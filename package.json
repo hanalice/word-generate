@@ -1,0 +1,24 @@
+{
+  "name": "word-generate",
+  "version": "0.0.1",
+  "description": "generate word file based on pieces of word files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "word",
+    "generation"
+  ],
+  "author": "Alice",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "docx": "^8.5.0",
+    "fs-extra": "^11.2.0",
+    "jszip": "^3.10.1",
+    "mammoth": "^1.8.0",
+    "path": "^0.12.7",
+    "xml2js": "^0.6.2"
+  }
+}
