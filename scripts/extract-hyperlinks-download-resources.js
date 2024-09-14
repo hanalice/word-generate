@@ -24,23 +24,26 @@ module.exports = async function extractAndDownloadResources(docxFilePath, downlo
     const relsJson = await parser.parseStringPromise(relsXml);
 
     const relationships = relsJson.Relationships.Relationship;
-    console.log('1documentJson:', documentJson['w:document']['w:body'])
-    // console.log('1找到以下超链接:', relationships)
+    console.log('1documentJson:', documentJson['w:document']['w:body'][0]['w:p'])
+    const wps = documentJson['w:document']['w:body'][0]['w:p'];
 
     // 遍历 document.xml 中的超链接
     const hyperlinks = [];
-    documentJson['w:document']['w:body'][0]['w:hyperlink'].forEach((link) => {
-        const rId = link['$']['r:id'];
-        const text = link['w:r'][0]['w:t'][0]; // 获取链接文本
+    wps.forEach((wp) => {
+        const links = wp['w:hyperlink'];
+        links?.forEach((link) => {
+            const rId = link['$']['r:id'];
+            const text = link['w:r'][0]['w:t'][0]; // 获取链接文本
 
-        // 查找关联的 URL
-        const relationship = relationships.find((rel) => rel['$']['Id'] === rId);
-        if (relationship && relationship['$']['TargetMode'] === 'External') {
-            hyperlinks.push({
-                text: text,
-                url: relationship['$']['Target']
-            });
-        }
+            // 查找关联的 URL
+            const relationship = relationships.find((rel) => rel['$']['Id'] === rId);
+            if (relationship && relationship['$']['TargetMode'] === 'External') {
+                hyperlinks.push({
+                    text: text,
+                    url: relationship['$']['Target']
+                });
+            }
+        })
     });
 
     console.log('2找到以下超链接:', hyperlinks);

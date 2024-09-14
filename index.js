@@ -1,8 +1,8 @@
 
 // import extractAndDownloadResources from './scripts/extract-download-resources.js'
-const edr = require('./scripts/extract-download-resources.js')
+const edr = require('./scripts/extract-hyperlinks-download-resources.js')
 // 示例调用
-const docxFilePath = 'loca.docx';  // 替换为你的 .docx 文件路径
+const docxFilePath = 'product.docx';  // 替换为你的 .docx 文件路径
 const downloadDir = './downloads';    // 资源保存目录
 
 edr(docxFilePath, downloadDir)
